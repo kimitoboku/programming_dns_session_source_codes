@@ -1,0 +1,12 @@
+$ORIGIN example.com.
+$TTL 3600
+@    IN SOA ns1.example.com. admin.example.com. (
+          2024010101 ; serial
+          3600       ; refresh
+          1800       ; retry
+          1209600    ; expire
+          3600       ; minimum TTL
+          )
+     IN NS ns1.example.com.
+ns1  IN A  192.168.0.1
+www  IN A  10.1.1.1

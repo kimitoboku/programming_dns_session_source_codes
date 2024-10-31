@@ -1,0 +1,32 @@
+version: '3'
+services:
+  master:
+    image: cznic/knot
+    container_name: knot-master
+    command: /usr/sbin/knotd
+    volumes:
+      - ./knot-master.conf:/config/knot.conf
+      - ./example.com.zone:/var/lib/knot/zones/example.com.zone
+    networks:
+      custom_network:
+        ipv4_address: 192.168.10.10
+
+  slave:
+    image: cznic/knot
+    container_name: knot-slave
+    command: /usr/sbin/knotd
+    volumes:
+      - ./knot-slave.conf:/config/knot.conf
+    ports:
+      - "15353:53/udp"
+      - "15353:53/tcp"
+    networks:
+      custom_network:
+        ipv4_address: 192.168.10.11
+
+networks:
+  custom_network:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 192.168.10.0/24

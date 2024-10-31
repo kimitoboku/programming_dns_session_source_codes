@@ -1,0 +1,12 @@
+$TTL 86400
+@            IN      SOA dns.example.com. root.example.com. (
+                     2002122001 ; serial
+                     3600       ; refresh 1hr
+                     900        ; retry 15min
+                     604800     ; expire 1w
+                     86400      ; min 24hr
+)
+             IN      NS     dns.example.jp.
+dns          IN      A      192.168.56.1
+srv          IN      A      192.168.56.101
+whashed	IN	LUA	A	"pickwrandom({ {1, '1.2.3.4'}, {2, '4.3.2.1'} })"

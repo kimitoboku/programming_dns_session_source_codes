@@ -1,0 +1,24 @@
+version: '3'
+services:
+  pdns:
+    build: ./pdns/
+    ports:
+      - 15353:53/tcp
+      - 15353:53/udp
+      - 8081:8081
+    volumes:
+    - "./pdns:/etc/powerdns"
+    environment:
+      MYSQL_ROOT_PASSWORD: examplepassword
+    links:
+      - mariadb
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb
+    volumes:
+      - ./mariadb:/docker-entrypoint-initdb.d/
+    environment:
+      MYSQL_ROOT_PASSWORD: examplepassword
+

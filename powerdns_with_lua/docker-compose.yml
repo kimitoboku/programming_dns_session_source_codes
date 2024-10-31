@@ -1,0 +1,10 @@
+version: "3"
+services:
+  powerdns:
+    ports:
+    - 5353:5353
+    build:
+      context: ./pdns/
+      dockerfile: Dockerfile
+    volumes:
+    - "./pdns:/etc/powerdns"
